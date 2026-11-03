@@ -1,0 +1,129 @@
+{
+  "slug": "dppm-2026",
+  "title": "DPPM: Dual-Path Parametric Memory for Personalized Language Models",
+  "citation": "Yuhao Chen et al. (2026). DPPM: Dual-Path Parametric Memory for Personalized Language Models. arXiv:2610.11776v1.",
+  "source_version": "arXiv:2610.11776v1 (12 pages; 8 Oct 2026)",
+  "source_urls": [
+    "https://arxiv.org/pdf/2610.11776v1",
+    "https://export.arxiv.org/pdf/2610.11776v1"
+  ],
+  "expected_pages": 12,
+  "repository": "AsukirinaAI/Paper-figures",
+  "output_dir": "DPPM",
+  "render_scale": 8.48528137423857,
+  "source_pdf_sha256_user_upload": "0439d295bb34f76c2bd048318fb1da936143f2b5c541ac7563f7289257029954",
+  "figures": [
+    {
+      "id": 1,
+      "page": 1,
+      "rect": [
+        303,
+        215,
+        528,
+        352
+      ]
+    },
+    {
+      "id": 2,
+      "page": 3,
+      "rect": [
+        69,
+        68,
+        527,
+        227
+      ]
+    },
+    {
+      "id": 3,
+      "page": 7,
+      "rect": [
+        69,
+        67,
+        526,
+        229
+      ]
+    },
+    {
+      "id": 4,
+      "page": 7,
+      "rect": [
+        69,
+        282,
+        293,
+        532
+      ]
+    },
+    {
+      "id": 5,
+      "page": 8,
+      "rect": [
+        69,
+        60,
+        291,
+        204
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "id": 1,
+      "page": 5,
+      "rect": [
+        69,
+        68,
+        526,
+        275
+      ]
+    },
+    {
+      "id": 2,
+      "page": 6,
+      "rect": [
+        69,
+        68,
+        526,
+        244
+      ]
+    },
+    {
+      "id": 3,
+      "page": 6,
+      "rect": [
+        69,
+        493,
+        291,
+        552
+      ]
+    },
+    {
+      "id": 4,
+      "page": 8,
+      "rect": [
+        69,
+        255,
+        291,
+        336
+      ]
+    },
+    {
+      "id": 5,
+      "page": 10,
+      "rect": [
+        304,
+        192,
+        526,
+        316
+      ]
+    },
+    {
+      "id": 6,
+      "page": 11,
+      "rect": [
+        69,
+        68,
+        291,
+        199
+      ]
+    }
+  ]
+}
