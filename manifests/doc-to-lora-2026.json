@@ -1,0 +1,269 @@
+{
+  "slug": "doc-to-lora-2026",
+  "title": "Doc-to-LoRA: Learning to Instantly Internalize Contexts",
+  "citation": "R. Charakorn et al. (2026). Doc-to-LoRA: Learning to Instantly Internalize Contexts, arXiv:2602.15902v1.",
+  "source_version": "arXiv:2602.15902v1 (28 pages)",
+  "source_urls": [
+    "https://arxiv.org/pdf/2602.15902v1",
+    "https://export.arxiv.org/pdf/2602.15902v1"
+  ],
+  "expected_pages": 28,
+  "repository": "AsukirinaAI/Paper-figures",
+  "output_dir": "Doc-to-LoRA",
+  "render_scale": 8.48528137423857,
+  "preserve_legacy_figure_urls": false,
+  "figures": [
+    {
+      "id": 1,
+      "page": 2,
+      "rect": [
+        54,
+        62,
+        542,
+        242
+      ]
+    },
+    {
+      "id": 2,
+      "page": 4,
+      "rect": [
+        307,
+        60,
+        541,
+        364
+      ]
+    },
+    {
+      "id": 3,
+      "page": 6,
+      "rect": [
+        54,
+        57,
+        543,
+        246
+      ]
+    },
+    {
+      "id": 4,
+      "page": 7,
+      "rect": [
+        54,
+        160,
+        542,
+        318
+      ]
+    },
+    {
+      "id": 5,
+      "page": 13,
+      "rect": [
+        54,
+        220,
+        543,
+        423
+      ]
+    },
+    {
+      "id": 6,
+      "page": 14,
+      "rect": [
+        131,
+        309,
+        464,
+        415
+      ]
+    },
+    {
+      "id": 7,
+      "page": 16,
+      "rect": [
+        54,
+        60,
+        543,
+        432
+      ]
+    },
+    {
+      "id": 8,
+      "page": 17,
+      "rect": [
+        54,
+        59,
+        543,
+        736
+      ]
+    },
+    {
+      "id": 9,
+      "page": 18,
+      "rect": [
+        126,
+        62,
+        482,
+        273
+      ]
+    },
+    {
+      "id": 10,
+      "page": 20,
+      "rect": [
+        54,
+        125,
+        543,
+        625
+      ]
+    },
+    {
+      "id": 11,
+      "page": 21,
+      "rect": [
+        54,
+        294,
+        543,
+        457
+      ]
+    },
+    {
+      "id": 12,
+      "page": 22,
+      "rect": [
+        54,
+        124,
+        543,
+        628
+      ]
+    },
+    {
+      "id": 13,
+      "page": 23,
+      "rect": [
+        54,
+        294,
+        543,
+        457
+      ]
+    }
+  ],
+  "tables": [
+    {
+      "id": 1,
+      "page": 7,
+      "rect": [
+        139,
+        79,
+        453,
+        160
+      ]
+    },
+    {
+      "id": 2,
+      "page": 7,
+      "rect": [
+        65,
+        451,
+        279,
+        486
+      ]
+    },
+    {
+      "id": 3,
+      "page": 8,
+      "rect": [
+        84,
+        71,
+        261,
+        137
+      ]
+    },
+    {
+      "id": 4,
+      "page": 8,
+      "rect": [
+        61,
+        159,
+        280,
+        242
+      ]
+    },
+    {
+      "id": 5,
+      "page": 14,
+      "rect": [
+        362,
+        484,
+        520,
+        530
+      ]
+    },
+    {
+      "id": 6,
+      "page": 14,
+      "rect": [
+        364,
+        622,
+        525,
+        663
+      ]
+    },
+    {
+      "id": 7,
+      "page": 15,
+      "rect": [
+        369,
+        169,
+        517,
+        205
+      ]
+    },
+    {
+      "id": 8,
+      "page": 15,
+      "rect": [
+        351,
+        314,
+        541,
+        396
+      ]
+    },
+    {
+      "id": 9,
+      "page": 15,
+      "rect": [
+        117,
+        527,
+        482,
+        616
+      ]
+    },
+    {
+      "id": 10,
+      "page": 16,
+      "rect": [
+        143,
+        519,
+        450,
+        608
+      ]
+    },
+    {
+      "id": 11,
+      "page": 16,
+      "rect": [
+        100,
+        664,
+        499,
+        697
+      ]
+    },
+    {
+      "id": 12,
+      "page": 19,
+      "rect": [
+        100,
+        101,
+        499,
+        165
+      ]
+    }
+  ]
+}

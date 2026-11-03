@@ -1,0 +1,45 @@
+name: Build research-paper figure and table assets
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/build-paper-assets.yml'
+      - 'scripts/extract_paper_assets.py'
+      - 'manifests/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paper-assets-build-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout current branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PyMuPDF
+        run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Extract and validate all public-paper figures and tables
+        run: python scripts/extract_paper_assets.py --all
+      - name: Commit verified high-resolution PNG assets
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No new image assets'
+          else
+            git commit -m 'Generate and archive high-resolution paper figures and tables (PNG only)'
+            git push
+          fi

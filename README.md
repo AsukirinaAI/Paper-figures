@@ -1,9 +1,43 @@
-# Paper figures
+# Paper-figures — 学术论文图表素材库
 
-High-resolution crops of figures from research papers, organized by paper. Please credit the original authors and publications when reusing them.
+本仓库用于保存**直接从原始论文 PDF 精确裁剪的高清 PNG**，供论文翻译、Obsidian、Markdown 和学术汇报引用。支持正文与附录的全部 **Figure 和 Table**。**不再导出裁剪版 PDF。**
 
-## Doc-to-LoRA
+## 入口
 
-Source: Charakorn et al. (2026), *Doc-to-LoRA: Learning to Instantly Internalize Contexts*, arXiv:2602.15902.
+- **[通用图表处理规范](docs/PAPER_ASSET_WORKFLOW.md)**：识别、核对、裁剪、渲染、命名、上传、引用及质量验收的完整工作流程。**任何 AI 处理新论文前，都应先读取此文档。**
+- **[论文翻译图表处理 Prompt](prompts/PAPER_TRANSLATION_ASSETS.md)**：一段供 AI 翻译论文时使用的简短指令；技术细节以仓库通用规范为准。
+- [通用提取脚本](scripts/extract_paper_assets.py) · [论文清单配置](manifests/) · [GitHub Actions 自动化](.github/workflows/build-paper-assets.yml)
 
-The 13 figure crops have been prepared as high-resolution PNG and cropped PDF files, but **the binary images have not yet been uploaded to this repository**. Do not use image URLs under `Doc-to-LoRA/` until those files have been committed.
+## 已收录论文
+
+| 论文 | 图 | 表 | 来源 | 索引 |
+| --- | ---: | ---: | --- | --- |
+| Doc-to-LoRA: Learning to Instantly Internalize Contexts (Charakorn et al., 2026) | 13 | 12 | [arXiv:2602.15902v1](https://arxiv.org/abs/2602.15902) | [Doc-to-LoRA](Doc-to-LoRA/README.md) |
+
+## 统一目录布局
+
+```text
+Paper-figures/
+├── README.md
+├── docs/PAPER_ASSET_WORKFLOW.md
+├── prompts/PAPER_TRANSLATION_ASSETS.md
+├── scripts/extract_paper_assets.py
+├── manifests/<paper-slug>.json
+├── .github/workflows/build-paper-assets.yml
+└── <Paper-Name>/
+    ├── README.md
+    ├── figures/Figure_01.png, Figure_02.png, ...
+    └── tables/Table_01.png, Table_02.png, ...
+```
+
+图片采用 PDF 原始图形直接高倍率渲染，**默认约 611 DPI，即原有 288 DPI 版本的约 4.5 倍总像素量**（每边约 2.121 倍），不对已有位图插值放大。具体分辨率和裁剪坐标记录于各论文 `manifests/*.json`。
+
+### Markdown / Obsidian 引用
+
+```markdown
+![Figure 1](https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Doc-to-LoRA/figures/Figure_01.png)
+
+![Table 1](https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Doc-to-LoRA/tables/Table_01.png)
+```
+
+请保留论文作者与来源信息，复用图片时遵守原文适用的版权或许可证。
