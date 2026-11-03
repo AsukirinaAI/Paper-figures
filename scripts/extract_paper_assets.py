@@ -8,6 +8,7 @@ Usage:
 
 Crop rectangles are specified in PDF points (72/in), origin top-left; PDF pages are 1-based.
 No cropped PDF files are ever produced. Human-reviewed rectangles are required in manifests.
+All outputs must be under Papers/<Paper-Name>/.
 """
 from __future__ import annotations
 
@@ -53,8 +54,10 @@ def validate_manifest(config: dict, pdf: fitz.Document) -> dict:
     if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", config["slug"]):
         raise ValueError("slug must contain only lowercase letters, digits and hyphens")
     out = Path(config["output_dir"])
-    if out.is_absolute() or ".." in out.parts or out == Path("."):
-        raise ValueError("output_dir must be a safe repository-relative directory")
+    # Keep the repository root free of per-paper directories.
+    if (out.is_absolute() or len(out.parts) != 2 or out.parts[0] != "Papers"
+            or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", out.parts[1])):
+        raise ValueError("output_dir must be Papers/<Paper-Name> (one ASCII slug directory)")
     expected_pages = int(config["expected_pages"])
     if len(pdf) != expected_pages:
         raise ValueError(f"Source PDF mismatch: expected {expected_pages} pages, got {len(pdf)}")
@@ -133,7 +136,7 @@ def extract_one(config: dict, pdf_path: Path) -> tuple[Path, int, int]:
         f"Output: **PNG only**, rendered at **{dpi} DPI** from original PDF vector/text content.",
         "",
         "Crop rectangles and PDF page numbers are recorded in the [manifest]"
-        f"(../manifests/{config['slug']}.json). The original source must match the manifest version.",
+        f"(../../manifests/{config['slug']}.json). The original source must match the manifest version.",
         "",
     ]
     for kind in ("figures", "tables"):
@@ -162,7 +165,7 @@ def extract_one(config: dict, pdf_path: Path) -> tuple[Path, int, int]:
     lines += ["## Reuse & attribution", "",
               "These are unaltered crops of the original authors' figures and tables (not redrawn).",
               "Credit the original paper and comply with its applicable license when reusing assets.",
-              "See [the repository-wide workflow](../docs/PAPER_ASSET_WORKFLOW.md) for conventions.", ""]
+              "See [the repository-wide workflow](../../docs/PAPER_ASSET_WORKFLOW.md) for conventions.", ""]
     (output / "README.md").write_text("\n".join(lines), encoding="utf-8")
     # Old vector PDF artifacts are intentionally removed; the input source PDF is elsewhere.
     for folder in (output, output / "figures", output / "tables"):

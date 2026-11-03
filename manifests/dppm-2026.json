@@ -9,7 +9,7 @@
   ],
   "expected_pages": 12,
   "repository": "AsukirinaAI/Paper-figures",
-  "output_dir": "DPPM",
+  "output_dir": "Papers/DPPM",
   "render_scale": 8.48528137423857,
   "source_pdf_sha256_user_upload": "0439d295bb34f76c2bd048318fb1da936143f2b5c541ac7563f7289257029954",
   "figures": [

@@ -9,9 +9,8 @@
   ],
   "expected_pages": 28,
   "repository": "AsukirinaAI/Paper-figures",
-  "output_dir": "Doc-to-LoRA",
+  "output_dir": "Papers/Doc-to-LoRA",
   "render_scale": 8.48528137423857,
-  "preserve_legacy_figure_urls": false,
   "figures": [
     {
       "id": 1,

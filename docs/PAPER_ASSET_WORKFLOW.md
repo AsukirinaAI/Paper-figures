@@ -1,13 +1,13 @@
 # 论文图表的高清提取、归档与引用规范（通用）
 
-> **唯一规范入口。** 适用于所有可取得原始 PDF 的研究论文，不限于 Doc-to-LoRA。论文翻译 Agent 应先读取本文件，然后依据当前论文的 PDF 和仓库资产目录执行。未完成核查或上传时不可杜撰有效链接。
+> **唯一规范入口。** 适用于所有可取得原始 PDF 的研究论文，不限于 Doc-to-LoRA。**所有论文资产统一存放在仓库 `Papers/<Paper-Name>/`，禁止在根目录直接新建论文目录，旧图片地址不再兼容。** 论文翻译 Agent 应先读取本文件，然后依据当前论文的 PDF 和仓库资产目录执行。未完成核查或上传时不可杜撰有效链接。
 
 ## 1. 目标与交付约束
 
 1. **完整性**：逐页识别正文和附录的全部编号 **Figure / Table**；对双栏、跨栏、子图 (a)/(b)、跨页表格及表格注释格外注意。
 2. **精确裁剪**：保留整张图或表的主体、刻度/图例、表头/尾行、脚注和必要注释；去除论文页眉页脚、无关正文和可单独翻译的 Figure/Table Caption。不得裁断笔画、字符或图表元素。
 3. **只输出高清 PNG**：从**原始 PDF 页面直接重新渲染裁剪区域**，默认 `scale = 4 × √4.5 ≈ 8.4853`，即 `72 × scale ≈ 611 DPI`，相对 288 DPI 旧版**总像素数约 4.5 倍**（宽、高各约 2.121 倍）。可按原始图质量调整，但不得通过二次放大低清截图充数。底色默认白色；不添加水印、不修改实验数值。
-4. **分类存储**：每篇论文独立目录，`figures/Figure_01.png` 和 `tables/Table_01.png`（编号从原文，英文/附录编号原样保留），图片名字稳定。
+4. **分类存储**：每篇论文独立目录 `Papers/<Paper-Name>/`，包含 `figures/Figure_01.png` 和 `tables/Table_01.png`（编号从原文，英文/附录编号原样保留），图片名字稳定。
 5. **溯源**：记录论文题名、版本、PDF 源地址、页数、每一项原 PDF 物理页码（从 1 开始）、裁剪坐标 `x0,y0,x1,y1`（PDF point）、倍率、数量与 Raw 链接。更新论文版本必须重新核对坐标。
 6. **可直接引用**：图表先确保已提交 GitHub `main` 并验证文件存在，再在译文中引用 Raw PNG 地址。翻译任务最终只交付一份已嵌入引用的 `.md` 文件，不附图片文件夹、压缩包或裁剪 PDF。
 
@@ -17,7 +17,7 @@
 
 - 确定 DOI/arXiv ID、版本（v1/v2 之间分页可能改变）、论文总页数及来源可靠性。
 - 优先使用用户提供的原始 PDF；公网上有**完全相同的版本**时，GitHub Actions 可从公开 HTTPS 地址重新下载。私人或非公开 PDF 不可上传到公开仓库，除非用户明确授权；本工作流仅适用于公开源。
-- 检查仓库是否已有该论文目录和 Manifest。如有完整图表并且版本匹配，**优先复用**，避免重复提取；否则新增或重建。
+- 检查 `Papers/` 下是否已有该论文目录和 Manifest。如有完整图表并且版本匹配，**优先复用**，避免重复提取；否则新增或重建。
 
 ### 2.2 盘点图表数量与位置
 
@@ -45,12 +45,14 @@
   "source_urls": ["https://example.org/paper.pdf"],
   "expected_pages": 12,
   "repository": "AsukirinaAI/Paper-figures",
-  "output_dir": "Example-Paper",
+  "output_dir": "Papers/Example-Paper",
   "render_scale": 8.48528137423857,
   "figures": [{"id": 1, "page": 2, "rect": [55, 102, 540, 341]}],
   "tables": [{"id": 1, "page": 3, "rect": [59, 155, 500, 294]}]
 }
 ```
+
+**`output_dir` 必须为 `Papers/<Paper-Name>`，且仅允许一层英文字母、数字、连字符或下划线命名的论文目录。提取脚本会强制校验。**
 
 **上述矩形仅是格式示例，绝不可直接用于其他论文。** 每份论文必须逐项定位并视觉验证。若 caption 页与主体页不同，可使用 `caption_page`。从不根据“论文通常有多少图”猜测应有条目数。
 
@@ -84,40 +86,41 @@ python scripts/extract_paper_assets.py --manifest manifests/<paper-slug>.json
 python scripts/extract_paper_assets.py --all
 ```
 
-脚本会检查 PDF 页数、caption 覆盖与位置、裁剪矩形越界、重复 ID，自动生成每篇论文的 `README.md` 索引及 Raw PNG 引用。Manifest 用于复现，新增论文时无需修改通用提取算法。
+脚本会检查 PDF 页数、caption 覆盖与位置、裁剪矩形越界、重复 ID，自动生成 `Papers/<Paper-Name>/README.md` 索引及新路径的 Raw PNG 引用。Manifest 用于复现，新增论文时无需修改通用提取算法。
 
 ### 2.6 检查与 GitHub 提交
 
 - **质量验收**：逐张查看大图和总览图，确保完整、清晰、图中实验数字与原文一致；没有图注混入或其他正文；无需追求无意义的超高 DPI，避免超大文件。
 - **完整性验收**：Figure/Table 数量与逐页盘点一致，所有文件命名和序号正确，`README.md` 和 Manifest 对应一致。
-- 使用 GitHub 写权限提交 `figures/`、`tables/`、`README.md`、Manifest；不要上传源论文 PDF、裁剪 PDF、临时截图或调试文件。
+- 使用 GitHub 写权限提交 `Papers/<Paper-Name>/figures/`、`Papers/<Paper-Name>/tables/`、论文的 `README.md` 及根目录的 Manifest；不要上传源论文 PDF、裁剪 PDF、临时截图或调试文件。
 - 公开论文可通过 [通用 GitHub Actions](../.github/workflows/build-paper-assets.yml) 在 GitHub Runner 上重新获取 PDF、生成 PNG 并自动提交，从而绕过聊天连接不能直接上传二进制文件的限制。
 - **确认 Actions success 后仍需查询仓库目录**，核查图片文件实际存在、至少抽样检查 Raw URL 返回正常内容；未验证前不要宣称“已上传”或输出虚构的可用引用。
 
 ## 3. 目录、引用与 Obsidian 规则
 
 ```text
-<Paper-Name>/
-├── README.md
-├── figures/Figure_01.png
-└── tables/Table_01.png
+Papers/
+└── <Paper-Name>/
+    ├── README.md
+    ├── figures/Figure_01.png
+    └── tables/Table_01.png
 ```
 
 基础 URL：
 
 ```text
-https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/<Paper-Name>/figures/Figure_01.png
-https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/<Paper-Name>/tables/Table_01.png
+https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Papers/<Paper-Name>/figures/Figure_01.png
+https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Papers/<Paper-Name>/tables/Table_01.png
 ```
 
 在 Obsidian Markdown 译文中，图表嵌入使用 Markdown 图片语法（**不是**普通 GitHub `blob/` 页面地址）：
 
 ```markdown
-![图 1：中文说明](https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Example-Paper/figures/Figure_01.png)
+![图 1：中文说明](https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Papers/Example-Paper/figures/Figure_01.png)
 
 图 1：完整的中文图注。 ^fig1
 
-![表 1：中文说明](https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Example-Paper/tables/Table_01.png)
+![表 1：中文说明](https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/Papers/Example-Paper/tables/Table_01.png)
 
 表 1：完整的中文表注。 ^tab1
 
@@ -139,6 +142,7 @@ https://raw.githubusercontent.com/AsukirinaAI/Paper-figures/main/<Paper-Name>/ta
 
 ## 5. 论文版本变更与维护
 
+- 不提供旧根目录图片路径兼容；翻译引用要使用 `/main/Papers/<Paper-Name>/...`，旧路径由使用者自行更新。
 - 论文 PDF 版本发生变化时重新盘点所有图表、更新 Manifest 坐标和索引，运行质量检查。
 - 不保留低分辨率重复版本或裁剪 PDF；统一使用高质量 PNG。
 - 引用文件名以原文的编号为核心，避免论文内容更新后指向错误图表；如果编号有变化，应同步更新翻译引用。
