@@ -12,6 +12,7 @@
 
 | 论文 | 图 | 表 | 来源 | 索引 |
 | --- | ---: | ---: | --- | --- |
+| RPMem: Learning Long-Term Recurrent Parametric Memory Across Sessions for LLM Agents (Zhao et al., 2026) | 7 | 32 | [arXiv:2609.23466v2](https://arxiv.org/abs/2609.23466v2) | [RPMem](Papers/RPMem/README.md) |
 | DPPM: Dual-Path Parametric Memory for Personalized Language Models (Chen et al., 2026) | 5 | 6 | [arXiv:2610.11776v1](https://arxiv.org/abs/2610.11776) | [DPPM](Papers/DPPM/README.md) |
 | Doc-to-LoRA: Learning to Instantly Internalize Contexts (Charakorn et al., 2026) | 13 | 12 | [arXiv:2602.15902v1](https://arxiv.org/abs/2602.15902) | [Doc-to-LoRA](Papers/Doc-to-LoRA/README.md) |
 

@@ -25,7 +25,7 @@ import fitz
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ID_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]{0,50}$")
-CAPTION_RE = re.compile(r"^\s*(Figure|Table)\s+([A-Za-z]?\d+[A-Za-z]?)\s*[.:]", re.I)
+CAPTION_RE = re.compile(r"^\s*(Figure|Table)\s+((?:[A-Za-z]\.?)?\d+[A-Za-z]?)\s*[.:|]", re.I)
 
 
 def paper_caption_locations(pdf: fitz.Document) -> dict[str, dict[str, int]]:
@@ -38,7 +38,7 @@ def paper_caption_locations(pdf: fitz.Document) -> dict[str, dict[str, int]]:
                 match = CAPTION_RE.match(line_text)
                 if match:
                     category = "figures" if match.group(1).lower() == "figure" else "tables"
-                    number = match.group(2).upper()
+                    number = match.group(2).upper().replace(".", "")
                     previous = found[category].get(number)
                     if previous is not None and previous != page_no:
                         raise ValueError(f"Ambiguous caption {category} {number} on pages {previous}, {page_no}")

@@ -6,6 +6,8 @@ on:
     paths:
       - '.github/workflows/build-paper-assets.yml'
       - 'scripts/extract_paper_assets.py'
+      - 'scripts/verify_paper_assets.py'
+      - 'tests/**'
       - 'manifests/**'
 
 permissions:
@@ -30,6 +32,8 @@ jobs:
           python-version: '3.11'
       - name: Install PyMuPDF
         run: python -m pip install --disable-pip-version-check pymupdf
+      - name: Check caption compatibility and extraction regression tests
+        run: python -m unittest discover -s tests -v
       - name: Extract and validate all paper assets under Papers/
         run: python scripts/extract_paper_assets.py --all
       - name: Commit verified PNG assets under Papers/
@@ -43,3 +47,5 @@ jobs:
             git commit -m 'Generate and archive high-resolution paper figures and tables (PNG only)'
             git push
           fi
+      - name: Verify every published Raw PNG
+        run: python scripts/verify_paper_assets.py
